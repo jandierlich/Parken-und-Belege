@@ -3,14 +3,14 @@
   --card: #FFFFFF;
   --ink: #241F3D;
   --sub: #8A85A6;
-  --violet: #6C4CE0;
-  --violet-deep: #3D2494;
-  --coral: #FF6B6B;
-  --teal: #12B3A6;
-  --amber: #F5A623;
-  --pink: #EF5DA8;
+  --violet: #5B2EE8;
+  --violet-deep: #2E1780;
+  --coral: #FF4757;
+  --teal: #00BFA6;
+  --amber: #FF9500;
+  --pink: #EC3D96;
   --line: #ECE8F7;
-  --amount: #1B2B4D;
+  --amount: #16294D;
   color-scheme: light;
 }
 
@@ -81,7 +81,7 @@ html, body {
   justify-content: space-between;
   align-items: center;
 }
-.summary-card .amount { font-family: 'IBM Plex Mono', monospace; font-size: 21px; font-weight: 700; color: var(--amount); }
+.summary-card .amount { font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 700; color: var(--amount); }
 .summary-sub { font-size: 12px; color: var(--sub); }
 .summary-photos { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--violet); font-weight: 600; margin-top: 2px; }
 

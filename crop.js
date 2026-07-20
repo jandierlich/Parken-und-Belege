@@ -70,13 +70,13 @@ function openCropTool(sourceCanvas) {
     // Zuschnitt-Rahmen (10% Rand initial)
     const rect = { x: dispW * 0.08, y: dispH * 0.08, w: dispW * 0.84, h: dispH * 0.84 };
     const rectEl = document.createElement('div');
-    rectEl.style.cssText = 'position:absolute;border:2px solid #F5A623;box-shadow:0 0 0 2000px rgba(0,0,0,0.5);box-sizing:border-box;';
+    rectEl.style.cssText = 'position:absolute;border:2px solid #FF9500;box-shadow:0 0 0 2000px rgba(0,0,0,0.5);box-sizing:border-box;';
     stage.appendChild(rectEl);
 
     const handles = {};
     ['nw', 'ne', 'sw', 'se'].forEach((pos) => {
       const h = document.createElement('div');
-      h.style.cssText = `position:absolute;width:26px;height:26px;background:#F5A623;border:3px solid #fff;border-radius:50%;touch-action:none;`;
+      h.style.cssText = `position:absolute;width:26px;height:26px;background:#FF9500;border:3px solid #fff;border-radius:50%;touch-action:none;`;
       stage.appendChild(h);
       handles[pos] = h;
     });
@@ -139,7 +139,7 @@ function openCropTool(sourceCanvas) {
     btnFull.style.cssText = "flex:1;padding:13px;border-radius:14px;border:2px solid #fff;background:transparent;color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;";
     const btnConfirm = document.createElement('button');
     btnConfirm.textContent = 'Zuschnitt übernehmen';
-    btnConfirm.style.cssText = "flex:1;padding:13px;border-radius:14px;border:none;background:linear-gradient(135deg,#6C4CE0,#3D2494);color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;";
+    btnConfirm.style.cssText = "flex:1;padding:13px;border-radius:14px;border:none;background:linear-gradient(135deg,#5B2EE8,#2E1780);color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;";
     btnRow.appendChild(btnFull);
     btnRow.appendChild(btnConfirm);
     overlay.appendChild(btnRow);

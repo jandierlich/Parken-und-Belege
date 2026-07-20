@@ -40,7 +40,7 @@ function fmtEUR(n) {
 // Kleiner, dezenter Bestätigungs-Effekt beim Speichern eines Belegs (komplett selbst
 // programmiert, keine externe Bild-/GIF-Datei, dadurch uneingeschränkt lizenzfrei).
 function celebrateConfirm() {
-  const colors = ['#6C4CE0', '#FF6B6B', '#12B3A6', '#F5A623', '#EF5DA8'];
+  const colors = ['#5B2EE8', '#FF4757', '#00BFA6', '#FF9500', '#EC3D96'];
   const container = document.createElement('div');
   container.className = 'confetti-container';
   const originX = window.innerWidth / 2;
@@ -213,7 +213,7 @@ function renderHome() {
   body.appendChild(el('div', { id: 'park-list' }, renderParkListItems(monthEntries)));
 
   body.appendChild(el('button', {
-    style: 'width:100%;margin-top:20px;padding:12px;border-radius:20px;border:2px solid var(--line);background:var(--card);color:var(--violet);font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;',
+    style: 'width:100%;margin-top:20px;padding:12px;border-radius:20px;border:2px solid var(--line);background:var(--card);color:var(--violet);font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;',
     onclick: () => { state.screen = 'about'; render(); },
   }, [icon(helpSvg(), 16), ' Über die App']));
 
@@ -355,7 +355,7 @@ function renderVoiceRecorder() {
 
   if (state.isRecording) {
     const btn = el('button', {
-      style: 'width:100%;padding:13px;border-radius:20px;border:none;background:var(--coral);color:#fff;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer',
+      style: 'width:100%;padding:13px;border-radius:20px;border:none;background:var(--coral);color:#fff;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer',
       onclick: async () => {
         const dataUrl = await state.voiceRecorder.stop();
         state.isRecording = false;
@@ -368,7 +368,7 @@ function renderVoiceRecorder() {
   }
 
   const btn = el('button', {
-    style: 'width:100%;padding:13px;border-radius:20px;border:2px dashed var(--sub);background:transparent;color:var(--ink);font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer',
+    style: 'width:100%;padding:13px;border-radius:20px;border:2px dashed var(--sub);background:transparent;color:var(--ink);font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer',
     onclick: async () => {
       try {
         state.voiceRecorder = createVoiceRecorder();
@@ -584,8 +584,8 @@ function updateExtraList() {
   renderExtraListItems().forEach(node => container.appendChild(node));
 }
 
-const catColors = { Betriebsmittel: '#F5A623', Spesen: '#12B3A6', Hotelrechnung: '#EF5DA8' };
-function colorForCat(cat) { return catColors[cat] || '#6C4CE0'; }
+const catColors = { Betriebsmittel: '#FF9500', Spesen: '#00BFA6', Hotelrechnung: '#EC3D96' };
+function colorForCat(cat) { return catColors[cat] || '#5B2EE8'; }
 
 function renderExtraRow(n) {
   return el('div', { class: 'card entry-row' }, [
@@ -736,7 +736,7 @@ function renderFahrtenContent() {
       el('div', { style: 'font-size:12px;color:var(--sub)' }, 'Gesamt gefahren'),
       el('div', { style: 'font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--violet);font-weight:600;margin-top:2px' }, `${totalKm.toFixed(1)} km`),
     ]),
-    el('span', { style: 'font-family:IBM Plex Mono,monospace;font-size:19px;font-weight:700;color:var(--amount)' }, fmtEUR(totalBetrag)),
+    el('span', { style: 'font-family:IBM Plex Mono,monospace;font-size:20px;font-weight:700;color:var(--amount)' }, fmtEUR(totalBetrag)),
   ]));
 
   if (allFahrten.length === 0) {
@@ -936,13 +936,13 @@ function renderAboutScreen() {
     'Alle Daten bleiben ausschließlich lokal auf diesem Gerät gespeichert – keine Cloud, kein Server.'));
 
   const items = [
-    { icon: mapPinSvg, color: '#6C4CE0', title: 'Parkscheine', text: 'Foto aufnehmen, Datum/Betrag werden per Texterkennung vorgeschlagen und lassen sich direkt bearbeiten.' },
-    { icon: briefcaseSvg, color: '#12B3A6', title: 'Nebenkosten', text: 'Mit frei anpassbaren Kategorien (umbenennbar, löschbar), Notizen und Belegfoto.' },
-    { icon: gameCarSvg, color: '#F5A623', title: 'Fahrten', text: 'Von/Nach/Zweck/Kilometer erfassen, automatische Berechnung mit Kilometerpauschale.' },
-    { icon: mapSvg, color: '#EF5DA8', title: 'Kilometerstand', text: 'Mit Foto und Ort/Anlass, z. B. praktisch beim Tanken.' },
-    { icon: micSvg, color: '#6C4CE0', title: 'Notizen', text: 'Freie Sprachnotizen, unabhängig von Belegen.' },
-    { icon: mapSvg, color: '#12B3A6', title: 'Karte', text: 'Zeigt jeden erfassten Parkort einzeln mit Standort an.' },
-    { icon: fileTextSvg, color: '#FF6B6B', title: 'Monat & Jahr', text: 'Übersicht mit Diagramm, individuell auswählbarem PDF-, CSV- und Excel-Export sowie vollständigem Backup (inkl. Fotos).' },
+    { icon: mapPinSvg, color: '#5B2EE8', title: 'Parkscheine', text: 'Foto aufnehmen, Datum/Betrag werden per Texterkennung vorgeschlagen und lassen sich direkt bearbeiten.' },
+    { icon: briefcaseSvg, color: '#00BFA6', title: 'Nebenkosten', text: 'Mit frei anpassbaren Kategorien (umbenennbar, löschbar), Notizen und Belegfoto.' },
+    { icon: gameCarSvg, color: '#FF9500', title: 'Fahrten', text: 'Von/Nach/Zweck/Kilometer erfassen, automatische Berechnung mit Kilometerpauschale.' },
+    { icon: mapSvg, color: '#EC3D96', title: 'Kilometerstand', text: 'Mit Foto und Ort/Anlass, z. B. praktisch beim Tanken.' },
+    { icon: micSvg, color: '#5B2EE8', title: 'Notizen', text: 'Freie Sprachnotizen, unabhängig von Belegen.' },
+    { icon: mapSvg, color: '#00BFA6', title: 'Karte', text: 'Zeigt jeden erfassten Parkort einzeln mit Standort an.' },
+    { icon: fileTextSvg, color: '#FF4757', title: 'Monat & Jahr', text: 'Übersicht mit Diagramm, individuell auswählbarem PDF-, CSV- und Excel-Export sowie vollständigem Backup (inkl. Fotos).' },
   ];
 
   items.forEach(it => {
@@ -1072,11 +1072,11 @@ function renderMap() {
     infoCard.appendChild(el('div', { class: 'card', style: 'margin:0;border-left:4px solid var(--violet)' }, [
       el('div', { style: 'font-size:10px;color:var(--violet);font-family:IBM Plex Mono,monospace;letter-spacing:0.5px;margin-bottom:2px' },
         allParkWithLocation.length > 1 ? `${allParkWithLocation.length} PARKORTE AUF DER KARTE` : 'ZULETZT GEPARKT'),
-      el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:15px' }, lastPark.ort || 'Parkort'),
+      el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px' }, lastPark.ort || 'Parkort'),
       el('div', { style: 'font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--sub);margin:4px 0 12px' }, new Date(lastPark.date).toLocaleDateString('de-DE') + (allParkWithLocation.length > 1 ? ' (neuester)' : '')),
       el('a', {
         href: mapsUrl,
-        style: 'display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:20px;background:linear-gradient(135deg,var(--violet),var(--violet-deep));color:#fff;text-decoration:none;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px',
+        style: 'display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:20px;background:linear-gradient(135deg,var(--violet),var(--violet-deep));color:#fff;text-decoration:none;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px',
       }, [icon(mapPinSvg(), 15), ' Standort auf OpenStreetMap öffnen']),
     ]));
   }
@@ -1084,11 +1084,11 @@ function renderMap() {
     const mapsUrl = `https://www.openstreetmap.org/?mlat=${lastKm.location.lat}&mlon=${lastKm.location.lng}#map=17/${lastKm.location.lat}/${lastKm.location.lng}`;
     infoCard.appendChild(el('div', { class: 'card', style: 'margin:0;border-left:4px solid var(--teal)' }, [
       el('div', { style: 'font-size:10px;color:var(--teal);font-family:IBM Plex Mono,monospace;letter-spacing:0.5px;margin-bottom:2px' }, 'LETZTER KILOMETERSTAND'),
-      el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:15px' }, `${lastKm.km.toLocaleString('de-DE')} km${lastKm.ort ? ' · ' + lastKm.ort : ''}`),
+      el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px' }, `${lastKm.km.toLocaleString('de-DE')} km${lastKm.ort ? ' · ' + lastKm.ort : ''}`),
       el('div', { style: 'font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--sub);margin:4px 0 12px' }, new Date(lastKm.date).toLocaleDateString('de-DE')),
       el('a', {
         href: mapsUrl,
-        style: 'display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:20px;background:linear-gradient(135deg,var(--teal),#0d8a80);color:#fff;text-decoration:none;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px',
+        style: 'display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:20px;background:linear-gradient(135deg,var(--teal),#008577);color:#fff;text-decoration:none;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px',
       }, [icon(mapPinSvg(), 15), ' Standort auf OpenStreetMap öffnen']),
     ]));
   }
@@ -1135,7 +1135,7 @@ function initMap() {
   });
   if (lastKm) {
     const kmPoint = [lastKm.location.lat, lastKm.location.lng];
-    const kmIcon = L.divIcon({ html: `<div style="background:#12B3A6;width:26px;height:26px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3)"></div>`, className: '', iconSize: [26, 26], iconAnchor: [13, 13] });
+    const kmIcon = L.divIcon({ html: `<div style="background:#00BFA6;width:26px;height:26px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3)"></div>`, className: '', iconSize: [26, 26], iconAnchor: [13, 13] });
     L.marker(kmPoint, { icon: kmIcon }).addTo(map).bindPopup(`⛽ ${lastKm.km.toLocaleString('de-DE')} km<br>${new Date(lastKm.date).toLocaleDateString('de-DE')}`);
   }
 
@@ -1175,11 +1175,11 @@ function renderMonth() {
   // Umschalter Monat / Jahr
   const toggle = el('div', { style: 'display:flex;background:var(--card);border-radius:20px;padding:4px;margin-top:16px;margin-bottom:16px;box-shadow:0 4px 16px rgba(60,40,150,0.07)' }, [
     el('button', {
-      style: `flex:1;padding:10px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;cursor:pointer;background:${state.overviewMode !== 'year' ? 'var(--violet)' : 'transparent'};color:${state.overviewMode !== 'year' ? '#fff' : 'var(--sub)'}`,
+      style: `flex:1;padding:10px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;cursor:pointer;background:${state.overviewMode !== 'year' ? 'var(--violet)' : 'transparent'};color:${state.overviewMode !== 'year' ? '#fff' : 'var(--sub)'}`,
       onclick: () => { state.overviewMode = 'month'; render(); },
     }, 'Monat'),
     el('button', {
-      style: `flex:1;padding:10px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;cursor:pointer;background:${state.overviewMode === 'year' ? 'var(--violet)' : 'transparent'};color:${state.overviewMode === 'year' ? '#fff' : 'var(--sub)'}`,
+      style: `flex:1;padding:10px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;cursor:pointer;background:${state.overviewMode === 'year' ? 'var(--violet)' : 'transparent'};color:${state.overviewMode === 'year' ? '#fff' : 'var(--sub)'}`,
       onclick: () => { state.overviewMode = 'year'; render(); },
     }, 'Jahr'),
   ]);
@@ -1191,7 +1191,7 @@ function renderMonth() {
     const isCurrentMonth = selectedMonthKey() === currentMonthKey();
     const monthNav = el('div', { style: 'display:flex;align-items:center;justify-content:space-between;margin-bottom:14px' }, [
       el('button', { class: 'icon-btn', style: 'background:var(--card);border-radius:16px;padding:8px;box-shadow:0 2px 8px rgba(60,40,150,0.08)', onclick: () => shiftSelectedMonth(-1), html: arrowLeftSvg() }),
-      el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:15px' }, monthLabel(selectedMonthKey())),
+      el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px' }, monthLabel(selectedMonthKey())),
       el('button', {
         class: 'icon-btn', style: `background:var(--card);border-radius:16px;padding:8px;box-shadow:0 2px 8px rgba(60,40,150,0.08);opacity:${isCurrentMonth ? '0.35' : '1'}`,
         onclick: () => { if (!isCurrentMonth) shiftSelectedMonth(1); },
@@ -1691,7 +1691,7 @@ function showXLSXPreview(filtered) {
   topBar.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;';
   const title = document.createElement('div');
   title.textContent = 'Vorschau: Was wird exportiert?';
-  title.style.cssText = "color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;";
+  title.style.cssText = "color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;";
   const closeBtn = document.createElement('button');
   closeBtn.textContent = 'Schließen ✕';
   closeBtn.style.cssText = "background:rgba(255,255,255,0.15);color:#fff;border:none;border-radius:16px;padding:8px 14px;font-family:Inter,sans-serif;font-size:13px;";
