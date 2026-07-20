@@ -1699,7 +1699,7 @@ async function buildCSV() {
 //    erhalten, auch wenn die Vorbereitung selbst einen Moment gedauert hat.
 function showXLSXPreview(filtered) {
   const overlay = document.createElement('div');
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(20,16,35,0.95);z-index:1000;display:flex;flex-direction:column;padding:16px;box-sizing:border-box;';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(20,16,35,0.95);z-index:1000;display:flex;flex-direction:column;padding:max(16px, env(safe-area-inset-top)) 16px 16px;box-sizing:border-box;';
 
   const topBar = document.createElement('div');
   topBar.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;';
@@ -1767,7 +1767,7 @@ function showXLSXPreview(filtered) {
 function showFilePreview(blob, mimeType) {
   const url = URL.createObjectURL(blob);
   const overlay = document.createElement('div');
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(20,16,35,0.95);z-index:1000;display:flex;flex-direction:column;padding:16px;box-sizing:border-box;';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(20,16,35,0.95);z-index:1000;display:flex;flex-direction:column;padding:max(16px, env(safe-area-inset-top)) 16px 16px;box-sizing:border-box;';
 
   const topBar = document.createElement('div');
   topBar.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;';
