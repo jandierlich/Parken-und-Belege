@@ -61,22 +61,22 @@ html, body {
 .header-row { position: relative; display: flex; align-items: center; gap: 10px; }
 .header-sub { font-size: 11px; letter-spacing: 2px; opacity: 0.75; text-transform: uppercase; font-family: 'IBM Plex Mono', monospace; }
 .header-title { font-size: 21px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; }
-.header-btn { background: rgba(255,255,255,0.15); border: none; color: #fff; border-radius: 10px; padding: 8px; cursor: pointer; display: flex; }
+.header-btn { background: rgba(255,255,255,0.15); border: none; color: #fff; border-radius: 16px; padding: 8px; cursor: pointer; display: flex; }
 
 .content { flex: 1; overflow-y: auto; padding: 0 18px 90px; overscroll-behavior-y: contain; }
 
 .card {
   background: var(--card);
-  border-radius: 16px;
+  border-radius: 22px;
   padding: 14px 16px;
   margin-bottom: 12px;
-  box-shadow: 0 4px 16px rgba(60,40,150,0.07);
+  box-shadow: 0 6px 22px rgba(60,40,150,0.06);
 }
 
 .summary-card {
   margin-top: 16px;
   margin-bottom: 16px;
-  box-shadow: 0 10px 28px rgba(60,40,150,0.14);
+  box-shadow: 0 12px 32px rgba(60,40,150,0.12);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -87,7 +87,7 @@ html, body {
 
 .entry-row { display: flex; align-items: center; gap: 12px; }
 .entry-badge {
-  width: 42px; height: 42px; border-radius: 13px; flex-shrink: 0;
+  width: 42px; height: 42px; border-radius: 18px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
   font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 700;
   background: linear-gradient(135deg, var(--violet), var(--violet-deep)); color: #fff;
@@ -119,13 +119,13 @@ html, body {
 .tab-btn.active { color: var(--violet); }
 
 .btn-primary {
-  width: 100%; padding: 14px; border-radius: 16px; border: none; cursor: pointer;
+  width: 100%; padding: 14px; border-radius: 22px; border: none; cursor: pointer;
   background: linear-gradient(135deg, var(--violet), var(--violet-deep)); color: #fff;
   font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px;
   box-shadow: 0 8px 20px rgba(60,40,150,0.25);
 }
 .btn-secondary {
-  width: 100%; padding: 14px; border-radius: 16px; border: 2px solid var(--violet); background: transparent;
+  width: 100%; padding: 14px; border-radius: 22px; border: 2px solid var(--violet); background: transparent;
   color: var(--violet); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; cursor: pointer;
 }
 .btn-row { display: flex; gap: 10px; }
@@ -133,21 +133,21 @@ html, body {
 
 label.field-label { font-size: 10px; letter-spacing: 1.2px; color: var(--sub); text-transform: uppercase; margin-bottom: 5px; display: block; font-family: 'IBM Plex Mono', monospace; }
 input, select, textarea {
-  width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 14px; border: 2px solid var(--line);
+  width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 20px; border: 2px solid var(--line);
   font-family: 'Inter', sans-serif; font-size: 15px; margin-bottom: 16px; background: var(--card); color: var(--ink);
 }
 textarea { resize: vertical; min-height: 60px; }
 
 .photo-capture {
-  height: 140px; border-radius: 18px; display: flex; align-items: center; justify-content: center;
+  height: 140px; border-radius: 26px; display: flex; align-items: center; justify-content: center;
   color: #fff; margin-bottom: 16px; font-size: 13px; gap: 8px; cursor: pointer; border: none; width: 100%;
   background: linear-gradient(135deg, var(--violet-deep), var(--violet)); overflow: hidden; position: relative;
 }
 .photo-capture img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.photo-capture .overlay-text { position: relative; background: rgba(0,0,0,0.35); padding: 6px 12px; border-radius: 10px; }
+.photo-capture .overlay-text { position: relative; background: rgba(0,0,0,0.35); padding: 6px 12px; border-radius: 16px; }
 
 .ocr-field {
-  display: flex; align-items: center; justify-content: space-between; background: var(--card); border-radius: 14px;
+  display: flex; align-items: center; justify-content: space-between; background: var(--card); border-radius: 20px;
   padding: 12px 15px; border: 2px solid var(--amber); margin-bottom: 4px;
 }
 .ocr-field.confirmed { border-color: var(--teal); }
@@ -159,24 +159,24 @@ textarea { resize: vertical; min-height: 60px; }
 .empty-state { text-align: center; padding: 40px 20px; color: var(--sub); font-size: 13px; }
 
 .backup-banner {
-  background: linear-gradient(135deg, var(--amber), #E8862A); color: #fff; border-radius: 14px; padding: 12px 14px;
+  background: linear-gradient(135deg, var(--amber), #E8862A); color: #fff; border-radius: 20px; padding: 12px 14px;
   margin-bottom: 14px; font-size: 12px; display: flex; align-items: center; gap: 10px; cursor: pointer;
 }
 
-.search-bar { display: flex; align-items: center; gap: 8px; background: var(--card); border-radius: 14px; padding: 4px 14px; margin-bottom: 12px; border: 2px solid var(--line); }
+.search-bar { display: flex; align-items: center; gap: 8px; background: var(--card); border-radius: 20px; padding: 4px 14px; margin-bottom: 12px; border: 2px solid var(--line); }
 .search-bar input { border: none; margin: 0; padding: 8px 0; }
 
 .swipe-actions { display: flex; gap: 6px; }
-.swipe-actions button { border: none; border-radius: 10px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.swipe-actions button { border: none; border-radius: 16px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
 
 #map { width: 100%; height: 100%; border-radius: 0; }
 .map-wrap { position: relative; flex: 1; }
 .map-info-card { position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 500; }
 
 .chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 60px; margin-top: 10px; }
-.chart-bars > div { flex: 1; border-radius: 6px; background: linear-gradient(180deg, var(--violet), transparent); }
+.chart-bars > div { flex: 1; border-radius: 10px; background: linear-gradient(180deg, var(--violet), transparent); }
 
-.total-strip { display: flex; justify-content: space-between; padding: 17px 18px; margin-top: 8px; border-radius: 18px; color: #fff; background: linear-gradient(135deg, var(--violet), var(--violet-deep)); box-shadow: 0 10px 24px rgba(60,40,150,0.25); font-family: 'Space Grotesk', sans-serif; }
+.total-strip { display: flex; justify-content: space-between; padding: 17px 18px; margin-top: 8px; border-radius: 26px; color: #fff; background: linear-gradient(135deg, var(--violet), var(--violet-deep)); box-shadow: 0 10px 24px rgba(60,40,150,0.25); font-family: 'Space Grotesk', sans-serif; }
 
 .confetti-container { position: fixed; inset: 0; pointer-events: none; z-index: 900; overflow: hidden; }
 .confetti-particle {

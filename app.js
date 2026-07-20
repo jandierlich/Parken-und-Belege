@@ -213,7 +213,7 @@ function renderHome() {
   body.appendChild(el('div', { id: 'park-list' }, renderParkListItems(monthEntries)));
 
   body.appendChild(el('button', {
-    style: 'width:100%;margin-top:20px;padding:12px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--violet);font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;',
+    style: 'width:100%;margin-top:20px;padding:12px;border-radius:20px;border:2px solid var(--line);background:var(--card);color:var(--violet);font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;',
     onclick: () => { state.screen = 'about'; render(); },
   }, [icon(helpSvg(), 16), ' Über die App']));
 
@@ -326,7 +326,7 @@ function renderAddPark() {
   body.appendChild(el('label', { class: 'field-label' }, 'Ort / Titel'));
   const ortInput = el('input', {
     type: 'text', id: 'park-ort', placeholder: 'z. B. Rathausplatz',
-    style: 'border:2px solid var(--violet);border-radius:14px;',
+    style: 'border:2px solid var(--violet);border-radius:20px;',
     value: state.editingId ? (state.parkscheine.find(p => p.id === state.editingId)?.ort || '') : '',
   });
   body.appendChild(ortInput);
@@ -344,8 +344,8 @@ function renderVoiceRecorder() {
   container.appendChild(el('label', { class: 'field-label' }, 'Sprachnotiz (optional)'));
 
   if (state.capturedAudio) {
-    const row = el('div', { style: 'display:flex;align-items:center;gap:10px;background:var(--card);border:2px solid var(--teal);border-radius:14px;padding:10px 14px' }, [
-      el('button', { class: 'icon-btn', style: 'background:var(--teal);color:#fff;border-radius:10px;width:34px;height:34px;flex-shrink:0', onclick: () => playVoiceNote(state.capturedAudio), html: playSvg() }),
+    const row = el('div', { style: 'display:flex;align-items:center;gap:10px;background:var(--card);border:2px solid var(--teal);border-radius:20px;padding:10px 14px' }, [
+      el('button', { class: 'icon-btn', style: 'background:var(--teal);color:#fff;border-radius:16px;width:34px;height:34px;flex-shrink:0', onclick: () => playVoiceNote(state.capturedAudio), html: playSvg() }),
       el('span', { style: 'flex:1;font-size:13px;color:var(--ink);font-family:Inter,sans-serif' }, 'Sprachnotiz aufgenommen'),
       el('button', { class: 'icon-btn', style: 'color:var(--coral)', onclick: () => { state.capturedAudio = null; render(); }, html: trashSvg() }),
     ]);
@@ -355,7 +355,7 @@ function renderVoiceRecorder() {
 
   if (state.isRecording) {
     const btn = el('button', {
-      style: 'width:100%;padding:13px;border-radius:14px;border:none;background:var(--coral);color:#fff;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer',
+      style: 'width:100%;padding:13px;border-radius:20px;border:none;background:var(--coral);color:#fff;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer',
       onclick: async () => {
         const dataUrl = await state.voiceRecorder.stop();
         state.isRecording = false;
@@ -368,7 +368,7 @@ function renderVoiceRecorder() {
   }
 
   const btn = el('button', {
-    style: 'width:100%;padding:13px;border-radius:14px;border:2px dashed var(--sub);background:transparent;color:var(--ink);font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer',
+    style: 'width:100%;padding:13px;border-radius:20px;border:2px dashed var(--sub);background:transparent;color:var(--ink);font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer',
     onclick: async () => {
       try {
         state.voiceRecorder = createVoiceRecorder();
@@ -495,17 +495,17 @@ function renderExtra() {
   wrap.appendChild(header('Übersicht', 'Kosten'));
   const body = el('div', { class: 'content', style: 'position:relative' });
 
-  const toggle = el('div', { style: 'display:flex;background:var(--card);border-radius:14px;padding:4px;margin-bottom:16px;box-shadow:0 4px 16px rgba(60,40,150,0.07)' }, [
+  const toggle = el('div', { style: 'display:flex;background:var(--card);border-radius:20px;padding:4px;margin-bottom:16px;box-shadow:0 4px 16px rgba(60,40,150,0.07)' }, [
     el('button', {
-      style: `flex:1;padding:10px 3px;border:none;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;cursor:pointer;background:${state.kostenTab === 'nebenkosten' ? 'var(--violet)' : 'transparent'};color:${state.kostenTab === 'nebenkosten' ? '#fff' : 'var(--sub)'}`,
+      style: `flex:1;padding:10px 3px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;cursor:pointer;background:${state.kostenTab === 'nebenkosten' ? 'var(--violet)' : 'transparent'};color:${state.kostenTab === 'nebenkosten' ? '#fff' : 'var(--sub)'}`,
       onclick: () => { state.kostenTab = 'nebenkosten'; render(); },
     }, 'Nebenkosten'),
     el('button', {
-      style: `flex:1;padding:10px 3px;border:none;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;cursor:pointer;background:${state.kostenTab === 'fahrten' ? 'var(--violet)' : 'transparent'};color:${state.kostenTab === 'fahrten' ? '#fff' : 'var(--sub)'}`,
+      style: `flex:1;padding:10px 3px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;cursor:pointer;background:${state.kostenTab === 'fahrten' ? 'var(--violet)' : 'transparent'};color:${state.kostenTab === 'fahrten' ? '#fff' : 'var(--sub)'}`,
       onclick: () => { state.kostenTab = 'fahrten'; render(); },
     }, 'Fahrten'),
     el('button', {
-      style: `flex:1;padding:10px 3px;border:none;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;cursor:pointer;background:${state.kostenTab === 'kmstand' ? 'var(--violet)' : 'transparent'};color:${state.kostenTab === 'kmstand' ? '#fff' : 'var(--sub)'}`,
+      style: `flex:1;padding:10px 3px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;cursor:pointer;background:${state.kostenTab === 'kmstand' ? 'var(--violet)' : 'transparent'};color:${state.kostenTab === 'kmstand' ? '#fff' : 'var(--sub)'}`,
       onclick: () => { state.kostenTab = 'kmstand'; render(); },
     }, 'km-Stand'),
   ]);
@@ -537,7 +537,7 @@ function renderExtra() {
     const active = state.activeCategory === cat;
     const row = el('div', { style: 'display:flex;align-items:stretch;gap:6px' }, [
       el('button', {
-        style: `flex:1;text-align:left;padding:12px 16px;border-radius:14px;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;background:${active ? 'var(--violet)' : 'rgba(108,76,224,0.1)'};color:${active ? '#fff' : 'var(--violet)'}`,
+        style: `flex:1;text-align:left;padding:12px 16px;border-radius:20px;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;background:${active ? 'var(--violet)' : 'rgba(108,76,224,0.1)'};color:${active ? '#fff' : 'var(--violet)'}`,
         onclick: () => { state.activeCategory = cat; render(); },
       }, cat),
     ]);
@@ -548,7 +548,7 @@ function renderExtra() {
     chipList.appendChild(row);
   });
   chipList.appendChild(el('button', {
-    style: 'width:100%;text-align:left;padding:12px 16px;border-radius:14px;border:2px dashed var(--sub);background:transparent;color:var(--sub);font-family:\'IBM Plex Mono\',monospace;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer',
+    style: 'width:100%;text-align:left;padding:12px 16px;border-radius:20px;border:2px dashed var(--sub);background:transparent;color:var(--sub);font-family:\'IBM Plex Mono\',monospace;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer',
     onclick: addCustomCategory,
   }, [icon(plusSvg(), 12), ' eigene Kategorie']));
   body.appendChild(chipList);
@@ -947,7 +947,7 @@ function renderAboutScreen() {
 
   items.forEach(it => {
     body.appendChild(el('div', { class: 'card', style: 'display:flex;gap:12px;align-items:flex-start' }, [
-      el('div', { style: `width:36px;height:36px;border-radius:10px;background:${it.color}1E;color:${it.color};display:flex;align-items:center;justify-content:center;flex-shrink:0` }, [icon(it.icon(), 17)]),
+      el('div', { style: `width:36px;height:36px;border-radius:16px;background:${it.color}1E;color:${it.color};display:flex;align-items:center;justify-content:center;flex-shrink:0` }, [icon(it.icon(), 17)]),
       el('div', {}, [
         el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;margin-bottom:2px' }, it.title),
         el('div', { style: 'font-family:Inter,sans-serif;font-size:12px;color:var(--sub);line-height:1.4' }, it.text),
@@ -1076,7 +1076,7 @@ function renderMap() {
       el('div', { style: 'font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--sub);margin:4px 0 12px' }, new Date(lastPark.date).toLocaleDateString('de-DE') + (allParkWithLocation.length > 1 ? ' (neuester)' : '')),
       el('a', {
         href: mapsUrl,
-        style: 'display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:14px;background:linear-gradient(135deg,var(--violet),var(--violet-deep));color:#fff;text-decoration:none;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px',
+        style: 'display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:20px;background:linear-gradient(135deg,var(--violet),var(--violet-deep));color:#fff;text-decoration:none;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px',
       }, [icon(mapPinSvg(), 15), ' Standort auf OpenStreetMap öffnen']),
     ]));
   }
@@ -1088,7 +1088,7 @@ function renderMap() {
       el('div', { style: 'font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--sub);margin:4px 0 12px' }, new Date(lastKm.date).toLocaleDateString('de-DE')),
       el('a', {
         href: mapsUrl,
-        style: 'display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:14px;background:linear-gradient(135deg,var(--teal),#0d8a80);color:#fff;text-decoration:none;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px',
+        style: 'display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:20px;background:linear-gradient(135deg,var(--teal),#0d8a80);color:#fff;text-decoration:none;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px',
       }, [icon(mapPinSvg(), 15), ' Standort auf OpenStreetMap öffnen']),
     ]));
   }
@@ -1173,13 +1173,13 @@ function renderMonth() {
   const body = el('div', { class: 'content' });
 
   // Umschalter Monat / Jahr
-  const toggle = el('div', { style: 'display:flex;background:var(--card);border-radius:14px;padding:4px;margin-top:16px;margin-bottom:16px;box-shadow:0 4px 16px rgba(60,40,150,0.07)' }, [
+  const toggle = el('div', { style: 'display:flex;background:var(--card);border-radius:20px;padding:4px;margin-top:16px;margin-bottom:16px;box-shadow:0 4px 16px rgba(60,40,150,0.07)' }, [
     el('button', {
-      style: `flex:1;padding:10px;border:none;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;cursor:pointer;background:${state.overviewMode !== 'year' ? 'var(--violet)' : 'transparent'};color:${state.overviewMode !== 'year' ? '#fff' : 'var(--sub)'}`,
+      style: `flex:1;padding:10px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;cursor:pointer;background:${state.overviewMode !== 'year' ? 'var(--violet)' : 'transparent'};color:${state.overviewMode !== 'year' ? '#fff' : 'var(--sub)'}`,
       onclick: () => { state.overviewMode = 'month'; render(); },
     }, 'Monat'),
     el('button', {
-      style: `flex:1;padding:10px;border:none;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;cursor:pointer;background:${state.overviewMode === 'year' ? 'var(--violet)' : 'transparent'};color:${state.overviewMode === 'year' ? '#fff' : 'var(--sub)'}`,
+      style: `flex:1;padding:10px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;cursor:pointer;background:${state.overviewMode === 'year' ? 'var(--violet)' : 'transparent'};color:${state.overviewMode === 'year' ? '#fff' : 'var(--sub)'}`,
       onclick: () => { state.overviewMode = 'year'; render(); },
     }, 'Jahr'),
   ]);
@@ -1190,10 +1190,10 @@ function renderMonth() {
   } else {
     const isCurrentMonth = selectedMonthKey() === currentMonthKey();
     const monthNav = el('div', { style: 'display:flex;align-items:center;justify-content:space-between;margin-bottom:14px' }, [
-      el('button', { class: 'icon-btn', style: 'background:var(--card);border-radius:10px;padding:8px;box-shadow:0 2px 8px rgba(60,40,150,0.08)', onclick: () => shiftSelectedMonth(-1), html: arrowLeftSvg() }),
+      el('button', { class: 'icon-btn', style: 'background:var(--card);border-radius:16px;padding:8px;box-shadow:0 2px 8px rgba(60,40,150,0.08)', onclick: () => shiftSelectedMonth(-1), html: arrowLeftSvg() }),
       el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:15px' }, monthLabel(selectedMonthKey())),
       el('button', {
-        class: 'icon-btn', style: `background:var(--card);border-radius:10px;padding:8px;box-shadow:0 2px 8px rgba(60,40,150,0.08);opacity:${isCurrentMonth ? '0.35' : '1'}`,
+        class: 'icon-btn', style: `background:var(--card);border-radius:16px;padding:8px;box-shadow:0 2px 8px rgba(60,40,150,0.08);opacity:${isCurrentMonth ? '0.35' : '1'}`,
         onclick: () => { if (!isCurrentMonth) shiftSelectedMonth(1); },
         html: `<span style="display:inline-block;transform:rotate(180deg)">${arrowLeftSvg()}</span>`,
       }),
@@ -1223,7 +1223,7 @@ function renderMonth() {
   ].forEach(([key, label]) => {
     const active = xsel[key];
     xlsxCatRow.appendChild(el('button', {
-      style: `padding:8px 12px;border-radius:20px;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;background:${active ? 'var(--violet)' : 'rgba(108,76,224,0.1)'};color:${active ? '#fff' : 'var(--violet)'}`,
+      style: `padding:8px 12px;border-radius:28px;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;background:${active ? 'var(--violet)' : 'rgba(108,76,224,0.1)'};color:${active ? '#fff' : 'var(--violet)'}`,
       onclick: () => { xsel[key] = !xsel[key]; render(); },
     }, label));
   });
@@ -1259,7 +1259,7 @@ function pdfCheckRow(label, count, unit, total, key, color) {
   }, [
     el('span', { style: 'display:flex;align-items:center;gap:10px' }, [
       el('span', {
-        style: `width:20px;height:20px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:${checked ? color : 'transparent'};border:2px solid ${color}`,
+        style: `width:20px;height:20px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:${checked ? color : 'transparent'};border:2px solid ${color}`,
         html: checked ? checkSvg() : '',
       }),
       el('span', {}, [label + ' ', el('span', { style: 'font-family:IBM Plex Mono,monospace;font-size:10px;color:var(--sub)' }, `(${count} ${unit})`)]),
@@ -1694,14 +1694,14 @@ function showXLSXPreview(filtered) {
   title.style.cssText = "color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;";
   const closeBtn = document.createElement('button');
   closeBtn.textContent = 'Schließen ✕';
-  closeBtn.style.cssText = "background:rgba(255,255,255,0.15);color:#fff;border:none;border-radius:10px;padding:8px 14px;font-family:Inter,sans-serif;font-size:13px;";
+  closeBtn.style.cssText = "background:rgba(255,255,255,0.15);color:#fff;border:none;border-radius:16px;padding:8px 14px;font-family:Inter,sans-serif;font-size:13px;";
   closeBtn.onclick = () => overlay.remove();
   topBar.appendChild(title);
   topBar.appendChild(closeBtn);
   overlay.appendChild(topBar);
 
   const box = document.createElement('div');
-  box.style.cssText = 'flex:1;background:#fff;border-radius:16px;overflow:auto;padding:16px;';
+  box.style.cssText = 'flex:1;background:#fff;border-radius:22px;overflow:auto;padding:16px;';
 
   function section(name, headers, rows) {
     const wrapDiv = document.createElement('div');
@@ -1762,7 +1762,7 @@ function showFilePreview(blob, mimeType) {
   title.style.cssText = "color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;";
   const closeBtn = document.createElement('button');
   closeBtn.textContent = 'Schließen ✕';
-  closeBtn.style.cssText = "background:rgba(255,255,255,0.15);color:#fff;border:none;border-radius:10px;padding:8px 14px;font-family:Inter,sans-serif;font-size:13px;";
+  closeBtn.style.cssText = "background:rgba(255,255,255,0.15);color:#fff;border:none;border-radius:16px;padding:8px 14px;font-family:Inter,sans-serif;font-size:13px;";
   closeBtn.onclick = () => { URL.revokeObjectURL(url); overlay.remove(); };
   topBar.appendChild(title);
   topBar.appendChild(closeBtn);
@@ -1771,18 +1771,18 @@ function showFilePreview(blob, mimeType) {
   if (mimeType === 'application/pdf') {
     const iframe = document.createElement('iframe');
     iframe.src = url;
-    iframe.style.cssText = 'flex:1;border:none;border-radius:16px;background:#fff;';
+    iframe.style.cssText = 'flex:1;border:none;border-radius:22px;background:#fff;';
     overlay.appendChild(iframe);
   } else if (mimeType.includes('spreadsheetml') || mimeType.includes('json')) {
     // Excel/JSON: Inhalt ist binär bzw. sehr technisch, keine sinnvolle Textvorschau möglich
     const box = document.createElement('div');
-    box.style.cssText = 'flex:1;background:#fff;border-radius:16px;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;';
+    box.style.cssText = 'flex:1;background:#fff;border-radius:22px;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;';
     box.innerHTML = `<div style="font-family:Inter,sans-serif;color:#241F3D;font-size:14px">Für diesen Dateityp gibt es keine Vorschau hier in der App.<br><br>Die Datei ist aber fertig und bereit zum Speichern.</div>`;
     overlay.appendChild(box);
   } else {
     // CSV: als Text anzeigen, da Browser diesen Typ nicht direkt darstellen
     const box = document.createElement('div');
-    box.style.cssText = 'flex:1;background:#fff;border-radius:16px;overflow:auto;padding:14px;';
+    box.style.cssText = 'flex:1;background:#fff;border-radius:22px;overflow:auto;padding:14px;';
     const pre = document.createElement('pre');
     pre.style.cssText = "margin:0;white-space:pre-wrap;word-break:break-word;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#241F3D;";
     blob.text().then(t => { pre.textContent = t; });

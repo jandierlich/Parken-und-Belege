@@ -1,4 +1,4 @@
-const CACHE_NAME = 'parken-und-belege-v53';
+const CACHE_NAME = 'parken-und-belege-v54';
 const APP_SHELL = [
   './',
   './index.html',
