@@ -183,11 +183,25 @@ const stopSvg = () => `<svg width="16" height="16" viewBox="0 0 24 24" fill="cur
 const playSvg = () => `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>`;
 
 // ---------- Home (Parkscheine) ----------
+function getGreeting() {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 11) return { text: 'Guten Morgen', emoji: '☀️' };
+  if (hour >= 11 && hour < 18) return { text: 'Guten Tag', emoji: '🌤️' };
+  if (hour >= 18 && hour < 22) return { text: 'Guten Abend', emoji: '🌇' };
+  return { text: 'Gute Nacht', emoji: '🌙' };
+}
+
 function renderHome() {
   const wrap = el('div', { style: 'display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden' });
   wrap.appendChild(header('Parken und Belege', monthNames[new Date().getMonth()] + ' ' + new Date().getFullYear()));
 
   const body = el('div', { class: 'content', style: 'position:relative' });
+
+  const greeting = getGreeting();
+  body.appendChild(el('div', { style: 'display:flex;align-items:center;gap:8px;margin:16px 0 4px' }, [
+    el('span', { style: 'font-size:22px' }, greeting.emoji),
+    el('span', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:16px;color:var(--ink)' }, greeting.text),
+  ]));
 
   const monthKey = currentMonthKey();
   const monthEntries = state.parkscheine.filter(p => p.date.startsWith(monthKey));
@@ -736,7 +750,7 @@ function renderFahrtenContent() {
       el('div', { style: 'font-size:12px;color:var(--sub)' }, 'Gesamt gefahren'),
       el('div', { style: 'font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--violet);font-weight:600;margin-top:2px' }, `${totalKm.toFixed(1)} km`),
     ]),
-    el('span', { style: 'font-family:IBM Plex Mono,monospace;font-size:20px;font-weight:700;color:var(--amount)' }, fmtEUR(totalBetrag)),
+    el('span', { style: 'font-family:IBM Plex Mono,monospace;font-size:17px;font-weight:700;color:var(--amount)' }, fmtEUR(totalBetrag)),
   ]));
 
   if (allFahrten.length === 0) {
@@ -1264,7 +1278,7 @@ function pdfCheckRow(label, count, unit, total, key, color) {
       }),
       el('span', {}, [label + ' ', el('span', { style: 'font-family:IBM Plex Mono,monospace;font-size:10px;color:var(--sub)' }, `(${count} ${unit})`)]),
     ]),
-    el('span', { style: 'font-family:IBM Plex Mono,monospace;font-weight:700;color:var(--amount)' }, fmtEUR(total)),
+    el('span', { style: 'font-family:IBM Plex Mono,monospace;font-weight:700;font-size:17px;color:var(--amount)' }, fmtEUR(total)),
   ]);
 }
 
@@ -1303,7 +1317,7 @@ function renderMonthContent() {
 
   frag.appendChild(el('div', { class: 'total-strip' }, [
     el('span', { style: 'font-weight:700' }, 'Ausgewählt'),
-    el('span', { style: 'font-family:IBM Plex Mono,monospace;font-weight:700;font-size:20px' }, fmtEUR(selectedTotal)),
+    el('span', { style: 'font-family:IBM Plex Mono,monospace;font-weight:700;font-size:17px' }, fmtEUR(selectedTotal)),
   ]));
 
   const pdfBtn = makeExportButton('btn-primary', downloadSvg(), 'PDF erstellen', async () => {
@@ -1349,7 +1363,7 @@ function renderYearContent() {
   frag.appendChild(pdfCheckRow('Fahrten', fahrtYear.length, 'Fahrten', totalFahrt, 'fahrt', 'var(--pink)'));
   frag.appendChild(el('div', { class: 'total-strip' }, [
     el('span', { style: 'font-weight:700' }, `Ausgewählt ${year}`),
-    el('span', { style: 'font-family:IBM Plex Mono,monospace;font-weight:700;font-size:20px' }, fmtEUR(selectedTotal)),
+    el('span', { style: 'font-family:IBM Plex Mono,monospace;font-weight:700;font-size:17px' }, fmtEUR(selectedTotal)),
   ]));
 
   const pdfBtn = makeExportButton('btn-primary', downloadSvg(), 'PDF erstellen', async () => {

@@ -81,7 +81,7 @@ html, body {
   justify-content: space-between;
   align-items: center;
 }
-.summary-card .amount { font-family: 'IBM Plex Mono', monospace; font-size: 20px; font-weight: 700; color: var(--amount); }
+.summary-card .amount { font-family: 'IBM Plex Mono', monospace; font-size: 17px; font-weight: 700; color: var(--amount); }
 .summary-sub { font-size: 12px; color: var(--sub); }
 .summary-photos { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--violet); font-weight: 600; margin-top: 2px; }
 
