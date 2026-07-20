@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impressum — Parken und Belege</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="header">
+    <div class="blob1"></div><div class="blob2"></div>
+    <div class="header-row">
+      <a href="index.html" class="header-btn" style="text-decoration:none;display:flex">←</a>
+      <div><div class="header-sub">Rechtliches</div><div class="header-title">Impressum</div></div>
+    </div>
+  </div>
+  <div class="content" style="padding-top:20px">
+    <div class="card">
+      <p><strong>Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG)</strong></p>
+      <p>
+        [Vor- und Nachname]<br>
+        [Straße, Hausnummer]<br>
+        [PLZ, Ort]
+      </p>
+      <p><strong>Kontakt</strong><br>E-Mail: [E-Mail-Adresse]</p>
+    </div>
+  </div>
+</div>
+<script src="db.js"></script>
+<script>
+  dbGetMeta('darkMode').then(dark => document.body.classList.toggle('dark', !!dark)).catch(() => {});
+</script>
+</body>
+</html>

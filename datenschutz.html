@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datenschutzerklärung — Parken und Belege</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div class="header">
+    <div class="blob1"></div><div class="blob2"></div>
+    <div class="header-row">
+      <a href="index.html" class="header-btn" style="text-decoration:none;display:flex">←</a>
+      <div><div class="header-sub">Rechtliches</div><div class="header-title">Datenschutz</div></div>
+    </div>
+  </div>
+  <div class="content" style="padding-top:20px;font-size:14px;line-height:1.6">
+    <div class="card">
+      <h3 style="margin-top:0">1. Verantwortlicher</h3>
+      <p>[Vor- und Nachname]<br>[Anschrift]<br>[E-Mail-Adresse]</p>
+
+      <h3>2. Datenverarbeitung durch die App</h3>
+      <p>"Parken und Belege" verarbeitet folgende Daten ausschließlich <strong>lokal in deinem Browser</strong> auf deinem Gerät: Fotos von Parkscheinen und Nebenkosten-Belegen; manuell oder per Texterkennung erfasste Angaben (Datum, Ort/Titel, Betrag, Kategorie, Notizen); Standortdaten, ausschließlich zur Anzeige des zuletzt erfassten Parkorts auf einer Karte.</p>
+
+      <h3>3. Keine Übermittlung an unsere Server</h3>
+      <p>Es findet keine Übertragung dieser Daten an uns oder an Dritte statt. Die Texterkennung (OCR) läuft vollständig offline im Browser. Es werden keine Nutzungsdaten, keine Analyse- oder Trackingdienste eingesetzt.</p>
+
+      <h3>4. Hosting & technische Bibliotheken</h3>
+      <p>Die Web-App wird über GitHub Pages (Microsoft/GitHub) bereitgestellt. Beim Aufruf verarbeitet GitHub technisch notwendige Server-Logs (u. a. IP-Adresse). Zur Funktion werden zudem folgende externe Bibliotheken nachgeladen: Leaflet (unpkg.com), Tesseract.js (jsdelivr.net), jsPDF (cdnjs.cloudflare.com) — dabei wird die IP-Adresse technisch notwendig an die jeweiligen Anbieter übertragen. Es kommen ausschließlich Systemschriften zum Einsatz, keine Google Fonts.</p>
+
+      <h3>5. Kartendarstellung</h3>
+      <p>Kartendaten: © OpenStreetMap-Mitwirkende, Open Database License.</p>
+
+      <h3>6. Kamera-, Standort- und Mikrofonzugriff</h3>
+      <p>Die App fragt Zugriff auf Kamera (zum Scannen von Belegen), Standort (zur Kartenanzeige) und Mikrofon (für optionale Sprachnotizen) an. Sprachnotizen werden ebenso wie Fotos ausschließlich lokal auf deinem Gerät gespeichert, nicht übertragen. Diese Berechtigungen können jederzeit in den Safari-/iPhone-Einstellungen widerrufen werden.</p>
+
+      <h3>7. Speicherdauer und Löschung</h3>
+      <p>Die Daten verbleiben im Browser-Speicher, bis du sie selbst löschst oder die Website-Daten in Safari leerst. Ein manueller Export/Backup ist über die Download-Funktion in der App möglich.</p>
+
+      <h3>8. Deine Rechte</h3>
+      <p>Da keine Beleg- oder Nutzungsdaten außerhalb deines Geräts verarbeitet werden, liegt die vollständige Kontrolle bei dir. Bei Fragen: [E-Mail-Adresse]</p>
+    </div>
+  </div>
+</div>
+<script src="db.js"></script>
+<script>
+  dbGetMeta('darkMode').then(dark => document.body.classList.toggle('dark', !!dark)).catch(() => {});
+</script>
+</body>
+</html>
