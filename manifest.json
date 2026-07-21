@@ -1,0 +1,16 @@
+{
+  "name": "Parken und Belege",
+  "short_name": "Parken & Belege",
+  "description": "Parkscheine und Nebenkosten erfassen, verwalten und als PDF exportieren.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F3F1F9",
+  "theme_color": "#4A2FBF",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
