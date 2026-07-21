@@ -206,7 +206,7 @@ function renderHome() {
   const greeting = getGreeting();
   body.appendChild(el('div', { style: 'display:flex;align-items:center;gap:8px;margin:16px 0 4px' }, [
     el('span', { style: 'font-size:22px' }, greeting.emoji),
-    el('span', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;color:var(--ink)' }, greeting.text),
+    el('span', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:16px;color:var(--ink)' }, greeting.text),
   ]));
 
   const monthKey = currentMonthKey();
@@ -340,7 +340,7 @@ function showUndoToast(store, entry) {
   }, [
     el('span', { style: 'font-family:Inter,sans-serif;font-size:13px' }, 'Eintrag gelöscht'),
     el('button', {
-      style: 'background:var(--violet);color:#fff;border:none;border-radius:16px;padding:8px 14px;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;cursor:pointer;flex-shrink:0;',
+      style: 'background:var(--violet);color:#fff;border:none;border-radius:16px;padding:8px 14px;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:13px;cursor:pointer;flex-shrink:0;',
       onclick: async () => {
         clearTimeout(undoTimer);
         toast.remove();
@@ -463,7 +463,7 @@ function ocrField(label, stateKey, confirmedKey, type, color) {
     type: type === 'date' ? 'date' : 'text',
     inputmode: type === 'date' ? null : 'decimal',
     value: state[stateKey] || '',
-    style: 'border:none;background:transparent;margin:0;padding:0;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;color:var(--ink);width:100%;',
+    style: 'border:none;background:transparent;margin:0;padding:0;font-family:\'IBM Plex Mono\',monospace;font-size:16px;color:var(--ink);width:100%;',
   });
   // Bei JEDEM Tastendruck sofort im State übernehmen (kein Warten auf "Blur"/Verlassen des Feldes)
   inputEl.addEventListener('input', (e) => { state[stateKey] = e.target.value; });
@@ -571,15 +571,15 @@ function renderExtra() {
 
   const toggle = el('div', { style: 'display:flex;background:var(--card);border-radius:20px;padding:4px;margin-bottom:16px;box-shadow:0 4px 16px rgba(60,40,150,0.07)' }, [
     el('button', {
-      style: `flex:1;padding:10px 3px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;cursor:pointer;background:${state.kostenTab === 'nebenkosten' ? 'var(--violet)' : 'transparent'};color:${state.kostenTab === 'nebenkosten' ? '#fff' : 'var(--sub)'}`,
+      style: `flex:1;padding:10px 3px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;cursor:pointer;background:${state.kostenTab === 'nebenkosten' ? 'var(--violet)' : 'transparent'};color:${state.kostenTab === 'nebenkosten' ? '#fff' : 'var(--sub)'}`,
       onclick: () => { state.kostenTab = 'nebenkosten'; render(); },
     }, 'Nebenkosten'),
     el('button', {
-      style: `flex:1;padding:10px 3px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;cursor:pointer;background:${state.kostenTab === 'fahrten' ? 'var(--violet)' : 'transparent'};color:${state.kostenTab === 'fahrten' ? '#fff' : 'var(--sub)'}`,
+      style: `flex:1;padding:10px 3px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;cursor:pointer;background:${state.kostenTab === 'fahrten' ? 'var(--violet)' : 'transparent'};color:${state.kostenTab === 'fahrten' ? '#fff' : 'var(--sub)'}`,
       onclick: () => { state.kostenTab = 'fahrten'; render(); },
     }, 'Fahrten'),
     el('button', {
-      style: `flex:1;padding:10px 3px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;cursor:pointer;background:${state.kostenTab === 'kmstand' ? 'var(--violet)' : 'transparent'};color:${state.kostenTab === 'kmstand' ? '#fff' : 'var(--sub)'}`,
+      style: `flex:1;padding:10px 3px;border:none;border-radius:16px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;cursor:pointer;background:${state.kostenTab === 'kmstand' ? 'var(--violet)' : 'transparent'};color:${state.kostenTab === 'kmstand' ? '#fff' : 'var(--sub)'}`,
       onclick: () => { state.kostenTab = 'kmstand'; render(); },
     }, 'km-Stand'),
   ]);
@@ -609,30 +609,22 @@ function renderExtra() {
   const chipList = el('div', { style: 'display:flex;flex-direction:column;gap:8px;margin-bottom:14px' });
   ['Alle', ...state.categories].forEach(cat => {
     const active = state.activeCategory === cat;
-    const row = el('div', {
-      class: 'card', style: `display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;opacity:${active ? '1' : '0.55'}`,
-      onclick: () => { state.activeCategory = cat; render(); },
-    }, [
-      el('span', { style: 'display:flex;align-items:center;gap:10px' }, [
-        el('span', {
-          style: `width:20px;height:20px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:${active ? 'var(--violet)' : 'transparent'};border:2px solid var(--violet)`,
-          html: active ? checkSvg() : '',
-        }),
-        el('span', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px' }, cat),
-      ]),
+    const row = el('div', { style: 'display:flex;align-items:stretch;gap:6px' }, [
+      el('button', {
+        style: `flex:1;text-align:left;padding:12px 16px;border-radius:20px;border:none;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;background:${active ? 'var(--violet)' : 'rgba(108,76,224,0.1)'};color:${active ? '#fff' : 'var(--violet)'}`,
+        onclick: () => { state.activeCategory = cat; render(); },
+      }, cat),
     ]);
     if (cat !== 'Alle') {
-      row.appendChild(el('span', { style: 'display:flex;gap:4px' }, [
-        el('button', { class: 'icon-btn', style: 'color:var(--sub)', onclick: (e) => { e.stopPropagation(); renameCategory(cat); }, html: pencilSvg() }),
-        el('button', { class: 'icon-btn', style: 'color:var(--coral)', onclick: (e) => { e.stopPropagation(); deleteCategory(cat); }, html: trashSvg() }),
-      ]));
+      row.appendChild(el('button', { class: 'icon-btn', style: 'color:var(--sub);flex-shrink:0;width:38px', onclick: () => renameCategory(cat), html: pencilSvg() }));
+      row.appendChild(el('button', { class: 'icon-btn', style: 'color:var(--coral);flex-shrink:0;width:38px', onclick: () => deleteCategory(cat), html: trashSvg() }));
     }
     chipList.appendChild(row);
   });
   chipList.appendChild(el('button', {
-    style: 'width:100%;text-align:left;padding:12px 16px;border-radius:22px;border:2px dashed var(--sub);background:transparent;color:var(--sub);font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;display:flex;align-items:center;gap:6px;cursor:pointer',
+    style: 'width:100%;text-align:left;padding:12px 16px;border-radius:20px;border:2px dashed var(--sub);background:transparent;color:var(--sub);font-family:\'IBM Plex Mono\',monospace;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer',
     onclick: addCustomCategory,
-  }, [icon(plusSvg(), 14), ' eigene Kategorie']));
+  }, [icon(plusSvg(), 12), ' eigene Kategorie']));
   body.appendChild(chipList);
 
   body.appendChild(el('div', { id: 'extra-list' }, renderExtraListItems()));
@@ -666,13 +658,23 @@ function updateExtraList() {
   renderExtraListItems().forEach(node => container.appendChild(node));
 }
 
+const catColors = { Betriebsmittel: '#FF9500', Spesen: '#00BFA6', Hotelrechnung: '#EC3D96' };
+const catColorsDark = { Betriebsmittel: '#FFB04D', Spesen: '#3DD9C4', Hotelrechnung: '#FF6BB8' };
+
+function colorForCat(cat) {
+  const isDark = document.body.classList.contains('dark');
+  const palette = isDark ? catColorsDark : catColors;
+  const fallback = isDark ? '#8368FF' : '#5B2EE8';
+  return palette[cat] || fallback;
+}
+
 function renderExtraRow(n) {
   return el('div', { class: 'card entry-row' }, [
-    el('div', { class: 'entry-badge' },
+    el('div', { class: 'entry-badge', style: `background:${colorForCat(n.kategorie)}1E;color:${colorForCat(n.kategorie)}` },
       n.photo ? [el('img', { src: n.photo })] : '€'),
     el('div', { class: 'entry-main' }, [
       el('div', { class: 'entry-title' }, n.titel),
-      el('div', { class: 'entry-cat', style: 'color:var(--violet)' }, n.kategorie.toUpperCase()),
+      el('div', { class: 'entry-cat', style: `color:${colorForCat(n.kategorie)}` }, n.kategorie.toUpperCase()),
     ]),
     el('div', { class: 'entry-amount' }, fmtEUR(n.betrag)),
     el('div', { class: 'swipe-actions' }, [
@@ -953,7 +955,7 @@ function renderKmContent() {
 
 function renderKmRow(k) {
   return el('div', { class: 'card entry-row' }, [
-    el('div', { class: 'entry-badge', style: 'background:rgba(108,76,224,0.12);color:var(--violet)' },
+    el('div', { class: 'entry-badge', style: 'background:rgba(18,179,166,0.14);color:var(--teal)' },
       k.photo ? [el('img', { src: k.photo })] : [icon(mapPinSvg(), 18)]),
     el('div', { class: 'entry-main' }, [
       el('div', { class: 'entry-title' }, `${k.km.toLocaleString('de-DE')} km`),
@@ -1120,7 +1122,7 @@ function renderAboutScreen() {
       el('div', { style: `width:36px;height:36px;border-radius:16px;background:${it.color}1E;color:${it.color};display:flex;align-items:center;justify-content:center;flex-shrink:0` }, [icon(it.icon(), 17)]),
       el('div', {}, [
         el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;margin-bottom:2px' }, it.title),
-        el('div', { style: 'font-family:Inter,sans-serif;font-size:13px;color:var(--sub);line-height:1.4' }, it.text),
+        el('div', { style: 'font-family:Inter,sans-serif;font-size:12px;color:var(--sub);line-height:1.4' }, it.text),
       ]),
     ]));
   });
@@ -1240,7 +1242,7 @@ function renderMap() {
   if (lastPark) {
     const mapsUrl = `https://www.openstreetmap.org/?mlat=${lastPark.location.lat}&mlon=${lastPark.location.lng}#map=17/${lastPark.location.lat}/${lastPark.location.lng}`;
     infoCard.appendChild(el('div', { class: 'card', style: 'margin:0;border-left:4px solid var(--violet)' }, [
-      el('div', { style: 'font-size:10px;color:var(--sub);font-family:IBM Plex Mono,monospace;letter-spacing:1px;margin-bottom:2px' },
+      el('div', { style: 'font-size:10px;color:var(--violet);font-family:IBM Plex Mono,monospace;letter-spacing:0.5px;margin-bottom:2px' },
         allParkWithLocation.length > 1 ? `${allParkWithLocation.length} PARKORTE AUF DER KARTE` : 'ZULETZT GEPARKT'),
       el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px' }, lastPark.ort || 'Parkort'),
       el('div', { style: 'font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--sub);margin:4px 0 12px' }, new Date(lastPark.date).toLocaleDateString('de-DE') + (allParkWithLocation.length > 1 ? ' (neuester)' : '')),
@@ -1253,7 +1255,7 @@ function renderMap() {
   if (lastKm) {
     const mapsUrl = `https://www.openstreetmap.org/?mlat=${lastKm.location.lat}&mlon=${lastKm.location.lng}#map=17/${lastKm.location.lat}/${lastKm.location.lng}`;
     infoCard.appendChild(el('div', { class: 'card', style: 'margin:0;border-left:4px solid var(--teal)' }, [
-      el('div', { style: 'font-size:10px;color:var(--sub);font-family:IBM Plex Mono,monospace;letter-spacing:1px;margin-bottom:2px' }, 'LETZTER KILOMETERSTAND'),
+      el('div', { style: 'font-size:10px;color:var(--teal);font-family:IBM Plex Mono,monospace;letter-spacing:0.5px;margin-bottom:2px' }, 'LETZTER KILOMETERSTAND'),
       el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px' }, `${lastKm.km.toLocaleString('de-DE')} km${lastKm.ort ? ' · ' + lastKm.ort : ''}`),
       el('div', { style: 'font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--sub);margin:4px 0 12px' }, new Date(lastKm.date).toLocaleDateString('de-DE')),
       el('a', {
@@ -1266,7 +1268,7 @@ function renderMap() {
 
   const mapWrap = el('div', { class: 'map-wrap' }, [
     el('div', { id: 'map' }),
-    el('div', { id: 'map-status', style: 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;font-size:13px;color:var(--sub);font-family:Inter,sans-serif;background:var(--bg);' }, 'Karte wird geladen …'),
+    el('div', { id: 'map-status', style: 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;font-size:12px;color:var(--sub);font-family:Inter,sans-serif;background:var(--bg);' }, 'Karte wird geladen …'),
   ]);
   wrap.appendChild(mapWrap);
   return wrap;
@@ -1374,7 +1376,7 @@ function renderMonth() {
 
   const fullBackupCard = el('div', { class: 'card', style: 'margin-top:8px' }, [
     el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;margin-bottom:4px' }, '🗄️ Vollständiges Backup'),
-    el('div', { style: 'font-size:13px;color:var(--sub);margin-bottom:12px' }, 'Enthält wirklich alles – inklusive Fotos und Sprachnotizen. Damit lässt sich der komplette Datenbestand 1:1 wiederherstellen.'),
+    el('div', { style: 'font-size:12px;color:var(--sub);margin-bottom:12px' }, 'Enthält wirklich alles – inklusive Fotos und Sprachnotizen. Damit lässt sich der komplette Datenbestand 1:1 wiederherstellen.'),
     el('div', { class: 'btn-row' }, [
       makeExportButton('btn-primary', downloadSvg(), 'Backup erstellen', buildFullBackup),
       el('button', { class: 'btn-secondary', onclick: triggerBackupImport }, 'Backup importieren'),
@@ -1383,7 +1385,7 @@ function renderMonth() {
 
   const xlsxCard = el('div', { class: 'card', style: 'margin-top:8px' }, [
     el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;margin-bottom:4px' }, '📊 Excel-Export'),
-    el('div', { style: 'font-size:13px;color:var(--sub);margin-bottom:12px' }, 'Formatierte Excel-Datei mit eigenen Tabellenblättern und Summenzeilen. Wähle unten aus, was und für welchen Zeitraum enthalten sein soll.'),
+    el('div', { style: 'font-size:12px;color:var(--sub);margin-bottom:12px' }, 'Formatierte Excel-Datei mit eigenen Tabellenblättern und Summenzeilen. Wähle unten aus, was und für welchen Zeitraum enthalten sein soll.'),
   ]);
 
   const xsel = state.xlsxSelection;
@@ -1462,7 +1464,7 @@ function renderMonthContent() {
   }
   const max = Math.max(...trend, 1);
   frag.appendChild(el('div', { class: 'card' }, [
-    el('div', { style: 'font-size:10px;color:var(--sub);font-family:IBM Plex Mono,monospace;letter-spacing:1px' }, 'AUSGABENVERLAUF (6 MONATE BIS AUSGEWÄHLTEM MONAT)'),
+    el('div', { style: 'font-size:11px;color:var(--sub);font-family:IBM Plex Mono,monospace' }, 'AUSGABENVERLAUF (6 MONATE BIS AUSGEWÄHLTEM MONAT)'),
     el('div', { class: 'chart-bars' }, trend.map(v => el('div', { style: `height:${Math.max((v / max) * 100, 4)}%` }))),
   ]));
 
@@ -1498,7 +1500,7 @@ function renderYearContent() {
   }
   const max = Math.max(...monthSums, 1);
   frag.appendChild(el('div', { class: 'card' }, [
-    el('div', { style: 'font-size:10px;color:var(--sub);font-family:IBM Plex Mono,monospace;letter-spacing:1px' }, `MONATSVERLAUF ${year}`),
+    el('div', { style: 'font-size:11px;color:var(--sub);font-family:IBM Plex Mono,monospace' }, `MONATSVERLAUF ${year}`),
     el('div', { class: 'chart-bars' }, monthSums.map(v => el('div', { style: `height:${Math.max((v / max) * 100, 4)}%` }))),
     el('div', { style: 'display:flex;justify-content:space-between;margin-top:4px' },
       ['J','F','M','A','M','J','J','A','S','O','N','D'].map(l => el('span', { style: 'font-size:9px;color:var(--sub);flex:1;text-align:center;font-family:IBM Plex Mono,monospace' }, l))),
@@ -1861,7 +1863,7 @@ function showXLSXPreview(filtered) {
   topBar.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;';
   const title = document.createElement('div');
   title.textContent = 'Vorschau: Was wird exportiert?';
-  title.style.cssText = "color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;";
+  title.style.cssText = "color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;";
   const closeBtn = document.createElement('button');
   closeBtn.textContent = 'Schließen ✕';
   closeBtn.style.cssText = "background:rgba(255,255,255,0.15);color:#fff;border:none;border-radius:16px;padding:8px 14px;font-family:Inter,sans-serif;font-size:13px;";
@@ -1883,7 +1885,7 @@ function showXLSXPreview(filtered) {
     if (rows.length === 0) {
       const empty = document.createElement('div');
       empty.textContent = 'Keine Einträge in diesem Zeitraum.';
-      empty.style.cssText = "font-family:Inter,sans-serif;font-size:13px;color:#8A85A6;";
+      empty.style.cssText = "font-family:Inter,sans-serif;font-size:12px;color:#8A85A6;";
       wrapDiv.appendChild(empty);
     } else {
       const table = document.createElement('table');
@@ -1929,7 +1931,7 @@ function showFilePreview(blob, mimeType) {
   topBar.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;';
   const title = document.createElement('div');
   title.textContent = 'Vorschau';
-  title.style.cssText = "color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;";
+  title.style.cssText = "color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;";
   const closeBtn = document.createElement('button');
   closeBtn.textContent = 'Schließen ✕';
   closeBtn.style.cssText = "background:rgba(255,255,255,0.15);color:#fff;border:none;border-radius:16px;padding:8px 14px;font-family:Inter,sans-serif;font-size:13px;";
@@ -1954,7 +1956,7 @@ function showFilePreview(blob, mimeType) {
     const box = document.createElement('div');
     box.style.cssText = 'flex:1;background:#fff;border-radius:22px;overflow:auto;padding:14px;';
     const pre = document.createElement('pre');
-    pre.style.cssText = "margin:0;white-space:pre-wrap;word-break:break-word;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#241F3D;";
+    pre.style.cssText = "margin:0;white-space:pre-wrap;word-break:break-word;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#241F3D;";
     blob.text().then(t => { pre.textContent = t; });
     box.appendChild(pre);
     overlay.appendChild(box);
