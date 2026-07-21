@@ -1863,7 +1863,7 @@ function showXLSXPreview(filtered) {
   topBar.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;';
   const title = document.createElement('div');
   title.textContent = 'Vorschau: Was wird exportiert?';
-  title.style.cssText = "color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;";
+  title.style.cssText = "color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;";
   const closeBtn = document.createElement('button');
   closeBtn.textContent = 'Schließen ✕';
   closeBtn.style.cssText = "background:rgba(255,255,255,0.15);color:#fff;border:none;border-radius:16px;padding:8px 14px;font-family:Inter,sans-serif;font-size:13px;";
