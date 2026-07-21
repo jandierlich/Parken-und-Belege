@@ -463,7 +463,7 @@ function ocrField(label, stateKey, confirmedKey, type, color) {
     type: type === 'date' ? 'date' : 'text',
     inputmode: type === 'date' ? null : 'decimal',
     value: state[stateKey] || '',
-    style: 'border:none;background:transparent;margin:0;padding:0;font-family:\'IBM Plex Mono\',monospace;font-size:16px;color:var(--ink);width:100%;',
+    style: 'border:none;background:transparent;margin:0;padding:0;font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;color:var(--ink);width:100%;',
   });
   // Bei JEDEM Tastendruck sofort im State übernehmen (kein Warten auf "Blur"/Verlassen des Feldes)
   inputEl.addEventListener('input', (e) => { state[stateKey] = e.target.value; });
@@ -1120,7 +1120,7 @@ function renderAboutScreen() {
       el('div', { style: `width:36px;height:36px;border-radius:16px;background:${it.color}1E;color:${it.color};display:flex;align-items:center;justify-content:center;flex-shrink:0` }, [icon(it.icon(), 17)]),
       el('div', {}, [
         el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;margin-bottom:2px' }, it.title),
-        el('div', { style: 'font-family:Inter,sans-serif;font-size:12px;color:var(--sub);line-height:1.4' }, it.text),
+        el('div', { style: 'font-family:Inter,sans-serif;font-size:13px;color:var(--sub);line-height:1.4' }, it.text),
       ]),
     ]));
   });
@@ -1266,7 +1266,7 @@ function renderMap() {
 
   const mapWrap = el('div', { class: 'map-wrap' }, [
     el('div', { id: 'map' }),
-    el('div', { id: 'map-status', style: 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;font-size:12px;color:var(--sub);font-family:Inter,sans-serif;background:var(--bg);' }, 'Karte wird geladen …'),
+    el('div', { id: 'map-status', style: 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;font-size:13px;color:var(--sub);font-family:Inter,sans-serif;background:var(--bg);' }, 'Karte wird geladen …'),
   ]);
   wrap.appendChild(mapWrap);
   return wrap;
@@ -1374,7 +1374,7 @@ function renderMonth() {
 
   const fullBackupCard = el('div', { class: 'card', style: 'margin-top:8px' }, [
     el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;margin-bottom:4px' }, '🗄️ Vollständiges Backup'),
-    el('div', { style: 'font-size:12px;color:var(--sub);margin-bottom:12px' }, 'Enthält wirklich alles – inklusive Fotos und Sprachnotizen. Damit lässt sich der komplette Datenbestand 1:1 wiederherstellen.'),
+    el('div', { style: 'font-size:13px;color:var(--sub);margin-bottom:12px' }, 'Enthält wirklich alles – inklusive Fotos und Sprachnotizen. Damit lässt sich der komplette Datenbestand 1:1 wiederherstellen.'),
     el('div', { class: 'btn-row' }, [
       makeExportButton('btn-primary', downloadSvg(), 'Backup erstellen', buildFullBackup),
       el('button', { class: 'btn-secondary', onclick: triggerBackupImport }, 'Backup importieren'),
@@ -1383,7 +1383,7 @@ function renderMonth() {
 
   const xlsxCard = el('div', { class: 'card', style: 'margin-top:8px' }, [
     el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;margin-bottom:4px' }, '📊 Excel-Export'),
-    el('div', { style: 'font-size:12px;color:var(--sub);margin-bottom:12px' }, 'Formatierte Excel-Datei mit eigenen Tabellenblättern und Summenzeilen. Wähle unten aus, was und für welchen Zeitraum enthalten sein soll.'),
+    el('div', { style: 'font-size:13px;color:var(--sub);margin-bottom:12px' }, 'Formatierte Excel-Datei mit eigenen Tabellenblättern und Summenzeilen. Wähle unten aus, was und für welchen Zeitraum enthalten sein soll.'),
   ]);
 
   const xsel = state.xlsxSelection;
@@ -1462,7 +1462,7 @@ function renderMonthContent() {
   }
   const max = Math.max(...trend, 1);
   frag.appendChild(el('div', { class: 'card' }, [
-    el('div', { style: 'font-size:11px;color:var(--sub);font-family:IBM Plex Mono,monospace' }, 'AUSGABENVERLAUF (6 MONATE BIS AUSGEWÄHLTEM MONAT)'),
+    el('div', { style: 'font-size:10px;color:var(--sub);font-family:IBM Plex Mono,monospace;letter-spacing:1px' }, 'AUSGABENVERLAUF (6 MONATE BIS AUSGEWÄHLTEM MONAT)'),
     el('div', { class: 'chart-bars' }, trend.map(v => el('div', { style: `height:${Math.max((v / max) * 100, 4)}%` }))),
   ]));
 
@@ -1498,7 +1498,7 @@ function renderYearContent() {
   }
   const max = Math.max(...monthSums, 1);
   frag.appendChild(el('div', { class: 'card' }, [
-    el('div', { style: 'font-size:11px;color:var(--sub);font-family:IBM Plex Mono,monospace' }, `MONATSVERLAUF ${year}`),
+    el('div', { style: 'font-size:10px;color:var(--sub);font-family:IBM Plex Mono,monospace;letter-spacing:1px' }, `MONATSVERLAUF ${year}`),
     el('div', { class: 'chart-bars' }, monthSums.map(v => el('div', { style: `height:${Math.max((v / max) * 100, 4)}%` }))),
     el('div', { style: 'display:flex;justify-content:space-between;margin-top:4px' },
       ['J','F','M','A','M','J','J','A','S','O','N','D'].map(l => el('span', { style: 'font-size:9px;color:var(--sub);flex:1;text-align:center;font-family:IBM Plex Mono,monospace' }, l))),
@@ -1883,7 +1883,7 @@ function showXLSXPreview(filtered) {
     if (rows.length === 0) {
       const empty = document.createElement('div');
       empty.textContent = 'Keine Einträge in diesem Zeitraum.';
-      empty.style.cssText = "font-family:Inter,sans-serif;font-size:12px;color:#8A85A6;";
+      empty.style.cssText = "font-family:Inter,sans-serif;font-size:13px;color:#8A85A6;";
       wrapDiv.appendChild(empty);
     } else {
       const table = document.createElement('table');
@@ -1954,7 +1954,7 @@ function showFilePreview(blob, mimeType) {
     const box = document.createElement('div');
     box.style.cssText = 'flex:1;background:#fff;border-radius:22px;overflow:auto;padding:14px;';
     const pre = document.createElement('pre');
-    pre.style.cssText = "margin:0;white-space:pre-wrap;word-break:break-word;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#241F3D;";
+    pre.style.cssText = "margin:0;white-space:pre-wrap;word-break:break-word;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#241F3D;";
     blob.text().then(t => { pre.textContent = t; });
     box.appendChild(pre);
     overlay.appendChild(box);
