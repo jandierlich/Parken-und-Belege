@@ -107,6 +107,7 @@ function render() {
   else if (state.screen === 'month') content.appendChild(renderMonth());
   else if (state.screen === 'notes') content.appendChild(renderNotes());
   else if (state.screen === 'about') content.appendChild(renderAboutScreen());
+  else if (state.screen === 'guide') content.appendChild(renderGuideScreen());
   else if (state.screen === 'search') content.appendChild(renderSearchScreen());
   else if (state.screen === 'add-note') content.appendChild(renderAddNote());
 
@@ -179,6 +180,7 @@ const sunSvg = () => `<svg width="16" height="16" viewBox="0 0 24 24" fill="none
 const micSvg = () => `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>`;
 const gameCarSvg = () => `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M5 17a2 2 0 1 0 0-4h14a2 2 0 1 0 0 4M5 13l1.5-5h11L19 13"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg>`;
 const helpSvg = () => `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
+const bookSvg = () => `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`;
 const arrowUpSvg = () => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>`;
 const stopSvg = () => `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>`;
 const playSvg = () => `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"/></svg>`;
@@ -232,10 +234,16 @@ function renderHome() {
 
   body.appendChild(el('div', { id: 'park-list' }, renderParkListItems(monthEntries)));
 
-  body.appendChild(el('button', {
-    style: 'width:100%;margin-top:20px;padding:12px;border-radius:20px;border:2px solid var(--line);background:var(--card);color:var(--violet);font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;',
-    onclick: () => { state.screen = 'about'; render(); },
-  }, [icon(helpSvg(), 16), ' Über die App']));
+  body.appendChild(el('div', { style: 'display:flex;gap:10px;margin-top:20px' }, [
+    el('button', {
+      style: 'flex:1;padding:12px;border-radius:20px;border:2px solid var(--line);background:var(--card);color:var(--violet);font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;',
+      onclick: () => { state.screen = 'guide'; render(); },
+    }, [icon(bookSvg(), 16), ' Anleitung']),
+    el('button', {
+      style: 'flex:1;padding:12px;border-radius:20px;border:2px solid var(--line);background:var(--card);color:var(--violet);font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;',
+      onclick: () => { state.screen = 'about'; render(); },
+    }, [icon(helpSvg(), 16), ' Über die App']),
+  ]));
 
   body.appendChild(el('div', { style: 'text-align:center;padding:14px 0 8px;font-size:11px;color:var(--sub);font-family:IBM Plex Mono,monospace' }, [
     el('a', { href: 'impressum.html', style: 'color:var(--sub);text-decoration:underline' }, 'Impressum'),
@@ -1097,6 +1105,111 @@ function renderSearchScreen() {
 
   wrap.appendChild(body);
   setTimeout(() => { const i = document.getElementById('global-search-input'); if (i) i.focus(); }, 50);
+  return wrap;
+}
+
+// ---------- Anleitung ----------
+function renderGuideScreen() {
+  const wrap = el('div', { style: 'display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden' });
+  wrap.appendChild(header('Schritt für Schritt', 'Anleitung', { onBack: () => { state.screen = 'home'; render(); } }));
+  const body = el('div', { class: 'content', style: 'padding-top:16px' });
+
+  const sections = [
+    {
+      title: 'Parkschein erfassen',
+      icon: mapPinSvg, color: '#5B2EE8',
+      steps: [
+        'Auf der Startseite unten rechts auf das Kamera-Symbol tippen.',
+        'Beleg fotografieren – Datum und Betrag werden automatisch per Texterkennung vorgeschlagen.',
+        'Vorschlag prüfen und bei Bedarf korrigieren, dann mit dem Häkchen bestätigen.',
+        'Ort/Titel eingeben (optional eine Sprachnotiz aufnehmen) und speichern.',
+      ],
+    },
+    {
+      title: 'Nebenkosten erfassen',
+      icon: briefcaseSvg, color: '#00BFA6',
+      steps: [
+        'Im Reiter "Kosten" den Tab "Nebenkosten" wählen, dann unten rechts auf "+".',
+        'Titel, Kategorie, Datum und Betrag eingeben, optional Foto und Notiz ergänzen.',
+        'Kategorien lassen sich über "Kosten" jederzeit umbenennen, löschen oder neu anlegen.',
+      ],
+    },
+    {
+      title: 'Fahrten erfassen',
+      icon: gameCarSvg, color: '#FF9500',
+      steps: [
+        'Im Reiter "Kosten" den Tab "Fahrten" wählen, dann unten rechts auf "+".',
+        'Von, Nach, Zweck und die gefahrenen Kilometer eingeben.',
+        'Der Betrag wird automatisch mit der Kilometerpauschale (0,30 €/km) berechnet.',
+      ],
+    },
+    {
+      title: 'Kilometerstand festhalten',
+      icon: mapSvg, color: '#EC3D96',
+      steps: [
+        'Im Reiter "Kosten" den Tab "km-Stand" wählen, dann unten rechts auf "+".',
+        'Kilometerstand eintragen, z. B. beim Tanken – Standort wird automatisch per GPS erfasst.',
+        'Optional ein Foto des Tachos hinzufügen.',
+      ],
+    },
+    {
+      title: 'Sprachnotizen',
+      icon: micSvg, color: '#5B2EE8',
+      steps: [
+        'Im Reiter "Notizen" unten rechts auf "+" tippen.',
+        'Optional einen Titel vergeben, dann die Aufnahme starten und wieder stoppen.',
+        'Alle Notizen lassen sich später direkt in der Liste abspielen.',
+      ],
+    },
+    {
+      title: 'Karte',
+      icon: mapSvg, color: '#00BFA6',
+      steps: [
+        'Zeigt jeden erfassten Parkort einzeln als Punkt auf der Karte.',
+        'Der zuletzt erfasste Kilometerstand-Ort wird zusätzlich türkis markiert.',
+        'Über die Infokarte lässt sich der Standort direkt in OpenStreetMap öffnen.',
+      ],
+    },
+    {
+      title: 'Monat & Jahr, Export und Backup',
+      icon: fileTextSvg, color: '#FF4757',
+      steps: [
+        'Zwischen "Monat" und "Jahr" umschalten, mit den Pfeilen durch die Zeiträume blättern.',
+        'Kategorien für den Export antippen (violett = ausgewählt), dann PDF oder CSV erstellen.',
+        'Weiter unten: formatierter Excel-Export mit eigener Kategorie- und Zeitraum-Auswahl.',
+        'Ganz unten: vollständiges Backup (inkl. Fotos/Audio) erstellen oder wiederherstellen.',
+      ],
+    },
+    {
+      title: 'Weitere praktische Funktionen',
+      icon: helpSvg, color: '#5B2EE8',
+      steps: [
+        'Übergreifend suchen: Lupe-Symbol oben auf der Startseite durchsucht alle Bereiche gleichzeitig.',
+        'Eintrag bearbeiten oder löschen: in jeder Liste nach links wischen oder die Symbole antippen.',
+        'Aus Versehen gelöscht? Unten erscheint kurz "Rückgängig".',
+        'Bestehenden Eintrag als Vorlage für einen neuen nutzen: beim Bearbeiten ganz unten.',
+        'Dark Mode: Mond-/Sonnen-Symbol oben rechts in der Kopfzeile.',
+      ],
+    },
+  ];
+
+  sections.forEach(sec => {
+    body.appendChild(el('div', { class: 'card' }, [
+      el('div', { style: 'display:flex;align-items:center;gap:10px;margin-bottom:10px' }, [
+        el('div', { style: `width:36px;height:36px;border-radius:16px;background:${sec.color}1E;color:${sec.color};display:flex;align-items:center;justify-content:center;flex-shrink:0` }, [icon(sec.icon(), 17)]),
+        el('div', { style: 'font-family:\'Space Grotesk\',sans-serif;font-weight:700;font-size:14px' }, sec.title),
+      ]),
+      ...sec.steps.map((s, i) => el('div', { style: 'display:flex;gap:8px;margin-bottom:6px' }, [
+        el('span', { style: 'font-family:IBM Plex Mono,monospace;font-size:12px;color:var(--sub);flex-shrink:0' }, `${i + 1}.`),
+        el('span', { style: 'font-family:Inter,sans-serif;font-size:13px;color:var(--sub);line-height:1.4' }, s),
+      ])),
+    ]));
+  });
+
+  body.appendChild(el('div', { style: 'text-align:center;font-size:11px;color:var(--sub);margin-top:8px;font-family:IBM Plex Mono,monospace' },
+    'Alle Daten bleiben ausschließlich lokal auf diesem Gerät gespeichert.'));
+
+  wrap.appendChild(body);
   return wrap;
 }
 
