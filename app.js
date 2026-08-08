@@ -235,6 +235,42 @@ function showAppModal(message, { showCancel = false } = {}) {
   });
 }
 function customAlert(message) { return showAppModal(message, { showCancel: false }); }
+
+// Zeigt ein aufgenommenes Foto vollflächig an (Fingertipp zum Vergrößern), mit Kreuz zum Schließen.
+function openImageLightbox(src) {
+  const overlay = el('div', { class: 'photo-lightbox-overlay', onclick: () => overlay.remove() }, [
+    el('img', { src, onclick: (e) => e.stopPropagation() }),
+    el('button', { class: 'photo-lightbox-close', onclick: (e) => { e.stopPropagation(); overlay.remove(); }, html: '✕' }),
+  ]);
+  document.body.appendChild(overlay);
+}
+
+// Gemeinsamer Foto-Aufnahme-Baustein für Parkschein/Nebenkosten/Kilometerstand:
+// zeigt das ganze Foto (kein Zuschnitt), Fingertipp öffnet die Lightbox, ein kleiner
+// Kamera-Button in der Ecke ersetzt das Foto (statt das ganze Vorschaubild antippbar zu machen).
+function renderPhotoCapture(inputId, onFileSelected, label = 'Foto aufnehmen') {
+  const wrap = el('div', { class: 'photo-capture-wrap' });
+  const box = el('button', {
+    class: 'photo-capture',
+    onclick: () => {
+      if (state.capturedPhoto) openImageLightbox(state.capturedPhoto);
+      else document.getElementById(inputId).click();
+    },
+  }, state.capturedPhoto
+      ? [el('img', { src: state.capturedPhoto })]
+      : [icon(cameraSvg(), 20), el('span', { class: 'overlay-text' }, label)]
+  );
+  wrap.appendChild(box);
+  if (state.capturedPhoto) {
+    wrap.appendChild(el('button', {
+      class: 'photo-retake-btn',
+      onclick: (e) => { e.stopPropagation(); document.getElementById(inputId).click(); },
+      html: cameraSvg(),
+    }));
+  }
+  wrap.appendChild(el('input', { type: 'file', accept: 'image/*', capture: 'environment', id: inputId, style: 'display:none', onchange: onFileSelected }));
+  return wrap;
+}
 function customConfirm(message) { return showAppModal(message, { showCancel: true }); }
 
 function icon(svg, size = 18) {
@@ -524,14 +560,7 @@ function renderAddPark() {
   wrap.appendChild(header(state.editingId ? 'Bearbeiten' : 'Neuer Eintrag', 'Parkschein', { onBack: () => { state.screen = 'home'; render(); } }));
   const body = el('div', { class: 'content' });
 
-  const photoBtn = el('button', { class: 'photo-capture', onclick: () => document.getElementById('park-file-input').click() },
-    state.capturedPhoto
-      ? [el('img', { src: state.capturedPhoto })]
-      : [icon(cameraSvg(), 20), el('span', { class: 'overlay-text' }, 'Foto aufnehmen')]
-  );
-  const fileInput = el('input', { type: 'file', accept: 'image/*', capture: 'environment', id: 'park-file-input', style: 'display:none', onchange: onParkPhotoSelected });
-  body.appendChild(photoBtn);
-  body.appendChild(fileInput);
+  body.appendChild(renderPhotoCapture('park-file-input', onParkPhotoSelected));
   body.appendChild(el('div', { id: 'ocr-status', style: 'font-size:11px;color:var(--sub);margin:-10px 0 14px;font-family:ui-monospace, monospace' }));
 
   body.appendChild(ocrField('Datum', 'ocrDate', 'ocrDateConfirmed', 'date', 'var(--violet)'));
@@ -915,14 +944,7 @@ function renderAddExtra() {
   wrap.appendChild(header(state.editingId ? 'Bearbeiten' : 'Neuer Eintrag', 'Nebenkosten', { onBack: () => { state.screen = 'extra'; render(); } }));
   const body = el('div', { class: 'content' });
 
-  const photoBtn = el('button', { class: 'photo-capture', onclick: () => document.getElementById('extra-file-input').click() },
-    state.capturedPhoto
-      ? [el('img', { src: state.capturedPhoto })]
-      : [icon(cameraSvg(), 20), el('span', { class: 'overlay-text' }, 'Beleg fotografieren')]
-  );
-  const fileInput = el('input', { type: 'file', accept: 'image/*', capture: 'environment', id: 'extra-file-input', style: 'display:none', onchange: async (e) => { state.capturedPhoto = await processPhotoFile(e.target.files[0]); render(); } });
-  body.appendChild(photoBtn);
-  body.appendChild(fileInput);
+  body.appendChild(renderPhotoCapture('extra-file-input', async (e) => { state.capturedPhoto = await processPhotoFile(e.target.files[0]); render(); }, 'Beleg fotografieren'));
 
   body.appendChild(el('label', { class: 'field-label' }, 'Titel'));
   const titelInput = el('input', { type: 'text', value: existing?.titel || state.duplicateExtra?.titel || '', placeholder: 'z. B. Tankstelle A5' });
@@ -1179,14 +1201,7 @@ function renderAddKm() {
   wrap.appendChild(header(state.editingId ? 'Bearbeiten' : 'Neuer Eintrag', 'Kilometerstand', { onBack: () => { state.screen = 'extra'; state.kostenTab = 'kmstand'; render(); } }));
   const body = el('div', { class: 'content' });
 
-  const photoBtn = el('button', { class: 'photo-capture', onclick: () => document.getElementById('km-file-input').click() },
-    state.capturedPhoto
-      ? [el('img', { src: state.capturedPhoto })]
-      : [icon(cameraSvg(), 20), el('span', { class: 'overlay-text' }, 'Foto aufnehmen (z. B. Tacho)')]
-  );
-  const fileInput = el('input', { type: 'file', accept: 'image/*', capture: 'environment', id: 'km-file-input', style: 'display:none', onchange: async (e) => { state.capturedPhoto = await processPhotoFile(e.target.files[0]); render(); } });
-  body.appendChild(photoBtn);
-  body.appendChild(fileInput);
+  body.appendChild(renderPhotoCapture('km-file-input', async (e) => { state.capturedPhoto = await processPhotoFile(e.target.files[0]); render(); }, 'Foto aufnehmen (z. B. Tacho)'));
 
   body.appendChild(el('label', { class: 'field-label' }, 'Datum'));
   const dateInput = el('input', { type: 'date', value: existing?.date || new Date().toISOString().slice(0, 10), style: 'width:100%;border:none;margin:0;padding:0;background:transparent;' });
@@ -2238,7 +2253,9 @@ function showFilePreview(blob, mimeType) {
 
   if (mimeType === 'application/pdf') {
     const iframe = document.createElement('iframe');
-    iframe.src = url;
+    // #view=FitH weist den PDF-Betrachter an, die Seite auf die verfügbare Breite
+    // einzupassen, statt sie in Originalgröße (breiter als der Bildschirm) zu zeigen.
+    iframe.src = url + '#view=FitH';
     iframe.style.cssText = 'flex:1;border:none;border-radius:22px;background:#fff;';
     overlay.appendChild(iframe);
   } else if (mimeType.includes('spreadsheetml') || mimeType.includes('json')) {
