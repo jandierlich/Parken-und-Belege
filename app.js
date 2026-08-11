@@ -442,7 +442,6 @@ function renderHome() {
   body.appendChild(el('div', { class: 'search-bar' }, [icon(searchSvg(), 16), parkSearch]));
 
   body.appendChild(el('div', { id: 'park-list' }, renderParkListItems(monthEntries)));
-  body.appendChild(el('div', { class: 'fab-spacer' }));
 
   wrap.appendChild(body);
   wrap.appendChild(el('button', { class: 'fab', onclick: () => { resetAddForm(); state.screen = 'add-park'; render(); }, html: cameraSvg() }));
@@ -781,7 +780,6 @@ function renderExtra() {
 
   if (state.kostenTab === 'fahrten') {
     body.appendChild(renderFahrtenContent());
-    body.appendChild(el('div', { class: 'fab-spacer' }));
     wrap.appendChild(body);
     wrap.appendChild(el('button', { class: 'fab', onclick: () => { resetFahrtForm(); state.screen = 'add-fahrt'; render(); }, html: plusSvg() }));
     return wrap;
@@ -789,7 +787,6 @@ function renderExtra() {
 
   if (state.kostenTab === 'kmstand') {
     body.appendChild(renderKmContent());
-    body.appendChild(el('div', { class: 'fab-spacer' }));
     wrap.appendChild(body);
     wrap.appendChild(el('button', { class: 'fab', onclick: () => { resetKmForm(); state.screen = 'add-km'; render(); }, html: plusSvg() }));
     return wrap;
@@ -824,7 +821,6 @@ function renderExtra() {
   body.appendChild(chipList);
 
   body.appendChild(el('div', { id: 'extra-list' }, renderExtraListItems()));
-  body.appendChild(el('div', { class: 'fab-spacer' }));
 
   wrap.appendChild(body);
   wrap.appendChild(el('button', { class: 'fab', onclick: () => { resetExtraForm(); state.screen = 'add-extra'; render(); }, html: plusSvg() }));
@@ -1461,7 +1457,6 @@ function renderNotes() {
       'Noch keine Sprachnotizen. Praktisch für alles, was nichts mit einem Beleg zu tun hat – z. B. eine schnelle Erinnerung während der Fahrt.'));
   }
   state.notizen.forEach(n => body.appendChild(renderNoteRow(n)));
-  body.appendChild(el('div', { class: 'fab-spacer' }));
 
   wrap.appendChild(body);
   wrap.appendChild(el('button', { class: 'fab', onclick: () => { resetNoteForm(); state.screen = 'add-note'; render(); }, html: micSvg() }));
