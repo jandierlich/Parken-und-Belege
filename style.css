@@ -128,7 +128,9 @@ html, body {
   background: var(--card); border-radius: 26px;
   padding: 8px 10px; display: flex; z-index: 10;
   box-shadow: 0 10px 30px rgba(30,20,70,0.18);
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
+.tabbar.tabbar-hidden { transform: translateY(140%); opacity: 0; }
 @media (max-width: 520px) { .tabbar { left: 14px; right: 14px; } }
 .tab-btn {
   flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 2px;

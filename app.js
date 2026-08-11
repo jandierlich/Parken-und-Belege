@@ -172,7 +172,30 @@ function render() {
 
   app.appendChild(content);
   if (['home', 'extra', 'map', 'month', 'notes', 'dashboard'].includes(state.screen)) {
-    app.appendChild(renderTabBar());
+    const tabbarEl = renderTabBar();
+    app.appendChild(tabbarEl);
+    const scroller = content.querySelector('.content');
+    if (scroller) {
+      let lastTop = scroller.scrollTop;
+      let ticking = false;
+      scroller.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const top = scroller.scrollTop;
+          const delta = top - lastTop;
+          if (top < 24) {
+            tabbarEl.classList.remove('tabbar-hidden');
+          } else if (delta > 6) {
+            tabbarEl.classList.add('tabbar-hidden');
+          } else if (delta < -6) {
+            tabbarEl.classList.remove('tabbar-hidden');
+          }
+          lastTop = top;
+          ticking = false;
+        });
+      }, { passive: true });
+    }
   }
 
   if (state.screen === 'map') {
